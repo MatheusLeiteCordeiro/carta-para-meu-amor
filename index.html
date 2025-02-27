@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para meu amor</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #cc0001; /* Cor de fundo atualizada */
+            font-family: 'Georgia', serif;
+            color: #fff; /* Cor do texto alterada para contrastar com o fundo */
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        .envelope {
+            cursor: pointer;
+            width: 300px;
+            transition: transform 0.5s ease;
+        }
+
+        .carta {
+            display: none;
+            position: fixed; /* Alterado para fixed */
+            top: 50%; /* Centraliza verticalmente */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translate(-50%, -50%); /* Ajusta o centro exato */
+            width: 80%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: aparecer 1s ease forwards;
+        }
+
+        @keyframes aparecer {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -40%); /* Começa um pouco abaixo */
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%); /* Termina no centro */
+            }
+        }
+
+        .carta p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333; /* Cor do texto da carta */
+        }
+
+        .carta.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Para meu amor</h1>
+        <img src="https://blog.uatt.com.br/wp-content/uploads/2022/02/como-fazer-uma-carta-de-amor-criativa-topo.jpg" alt="Envelope" class="envelope" onclick="abrirCarta()">
+        <div class="carta" id="carta">
+            <p id="texto-carta">Aqui vai o texto da carta...</p>
+        </div>
+    </div>
+
+    <script>
+        function abrirCarta() {
+            const carta = document.getElementById('carta');
+            carta.classList.add('visible');
+
+            // Adicione o texto da carta aqui
+            const textoCarta = `
+                Meu amor,<br><br>
+                Lhe escrevo esta carta digital para agradecer por este mês maravilhoso que passamos, você é muito especial, de verdade. Penso em você toda hora, todo dia, quero passar todo tempo com você e todo tempo ainda é pouco pra dançar com meu benzinho numa sala de reboco. Sexta a gente comemora nosso dia. Tô doidin pra te cheirar minha flor morena.<br><br>
+                .<br><br>
+                Com todo o meu amor ❤️,<br>
+                [Seu gatinho]
+            `;
+            document.getElementById('texto-carta').innerHTML = textoCarta;
+        }
+    </script>
+</body>
+</html>
