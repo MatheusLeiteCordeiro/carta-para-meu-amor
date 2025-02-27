@@ -11,9 +11,10 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #cc0001; /* Cor de fundo atualizada */
+            background-color: #cc0001;
             font-family: 'Georgia', serif;
-            color: #fff; /* Cor do texto alterada para contrastar com o fundo */
+            color: #fff;
+            overflow: hidden; /* Impede a rolagem da página */
         }
 
         .container {
@@ -29,10 +30,10 @@
 
         .carta {
             display: none;
-            position: fixed; /* Alterado para fixed */
-            top: 50%; /* Centraliza verticalmente */
-            left: 50%; /* Centraliza horizontalmente */
-            transform: translate(-50%, -50%); /* Ajusta o centro exato */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 80%;
             max-width: 400px;
             background-color: #fff;
@@ -45,29 +46,47 @@
         @keyframes aparecer {
             0% {
                 opacity: 0;
-                transform: translate(-50%, -40%); /* Começa um pouco abaixo */
+                transform: translate(-50%, -40%);
             }
             100% {
                 opacity: 1;
-                transform: translate(-50%, -50%); /* Termina no centro */
+                transform: translate(-50%, -50%);
             }
         }
 
         .carta p {
             font-size: 18px;
             line-height: 1.6;
-            color: #333; /* Cor do texto da carta */
+            color: #333;
         }
 
         .carta.visible {
             display: block;
+        }
+
+        .emoji-heart {
+            position: absolute;
+            bottom: -50px; /* Começa abaixo da tela */
+            font-size: 30px;
+            animation: subir 3s linear forwards;
+        }
+
+        @keyframes subir {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh); /* Sobe até o topo da tela */
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Para meu amor</h1>
-        <img src="https://blog.uatt.com.br/wp-content/uploads/2022/02/como-fazer-uma-carta-de-amor-criativa-topo.jpg" alt="Envelope" class="envelope" onclick="abrirCarta()">
+        <img src="https://i.imgur.com/3QZQZQz.png" alt="Envelope" class="envelope" onclick="abrirCarta()">
         <div class="carta" id="carta">
             <p id="texto-carta">Aqui vai o texto da carta...</p>
         </div>
@@ -87,6 +106,31 @@
                 [Seu gatinho]
             `;
             document.getElementById('texto-carta').innerHTML = textoCarta;
+
+            // Cria emojis de coração
+            criarCoracoes();
+        }
+
+        function criarCoracoes() {
+            const numCoracoes = 20; // Número de corações
+            for (let i = 0; i < numCoracoes; i++) {
+                const coracao = document.createElement('div');
+                coracao.innerHTML = '❤️';
+                coracao.classList.add('emoji-heart');
+
+                // Posiciona os corações aleatoriamente na horizontal
+                coracao.style.left = `${Math.random() * 100}vw`;
+
+                // Define um atraso aleatório para a animação
+                coracao.style.animationDelay = `${Math.random() * 2}s`;
+
+                document.body.appendChild(coracao);
+
+                // Remove o coração do DOM após a animação terminar
+                coracao.addEventListener('animationend', () => {
+                    coracao.remove();
+                });
+            }
         }
     </script>
 </body>
